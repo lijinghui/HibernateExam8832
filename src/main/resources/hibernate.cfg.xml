@@ -1,0 +1,44 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<property name="show_sql">true</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost/test</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password"></property>
+		<property name="show_sql">true</property>
+		<!-- validate 默认值 根据持久化类和映射文件检查表的结构 update hibernate容器在启动的时候，会根据持久化类和映射文件检查表的结构 
+			如果不存在，则创建，如果存在，则更新 create 每次启动hibernate容器，不管表是否存在，都会创建 create-drop 当启动hibernate容器时创建表，当hibernate容器销毁时，删除表 -->
+		<property name="hbm2ddl.auto">update</property>
+		<property name="format_sql">true</property>
+		<mapping resource="model/Actor.hbm.xml" />
+		<mapping resource="model/ActorInfo.hbm.xml" />
+		<mapping resource="model/Address.hbm.xml" />
+		<mapping resource="model/Category.hbm.xml" />
+		<mapping resource="model/Customer.hbm.xml" />
+		<mapping resource="model/CustomerList.hbm.xml" />
+		<mapping resource="model/Film.hbm.xml" />
+		<mapping resource="model/FilmActor.hbm.xml" />
+		<mapping resource="model/FilmCategory.hbm.xml" />
+		<mapping resource="model/FilmList.hbm.xml" />
+		<mapping resource="model/FilmText.hbm.xml" />
+		<mapping resource="model/Inventory.hbm.xml" />
+		<mapping resource="model/Language.hbm.xml" />
+		<mapping resource="model/NicerButSlowerFilmList.hbm.xml" />
+		<mapping resource="model/Payment.hbm.xml" />
+		<mapping resource="model/Rental.hbm.xml" />
+		<mapping resource="model/SalesByFilmCategory.hbm.xml" />
+		<mapping resource="model/SalesByStore.hbm.xml" />
+		<mapping resource="model/Staff.hbm.xml" />
+		<mapping resource="model/StaffList.hbm.xml" />
+		<mapping resource="model/Store.hbm.xml" />
+		<mapping resource="model/Country.hbm.xml" />
+		<mapping resource="model/City.hbm.xml" />
+
+
+	</session-factory>
+</hibernate-configuration>
