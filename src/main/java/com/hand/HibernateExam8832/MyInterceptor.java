@@ -18,7 +18,7 @@ public class MyInterceptor extends EmptyInterceptor {
 	// This method is called when Employee object gets created.
 	public boolean onSave(Object entity, Serializable id, Object[] state, String[] propertyNames, Type[] types) {
 		if (entity instanceof Customer) {
-			System.out.println("Befor save");
+			System.out.println("Before save");
 			return true;
 		}
 		return false;

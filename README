@@ -1,2 +1,3 @@
+mvn clean
 mvn compile
-mvn tomcat:runmvn exec:java -Dexec.mainClass="com.hand.HibernateExam8832.App"
+mvn exec:java -Dexec.mainClass="com.hand.HibernateExam8832.App"

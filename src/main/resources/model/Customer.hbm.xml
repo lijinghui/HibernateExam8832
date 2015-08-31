@@ -8,10 +8,10 @@
             <column name="customer_id" />
             <generator class="identity" />
         </id>
-        <many-to-one name="address" class="com.hand.model.Address" fetch="select">
+        <many-to-one name="address"  class="com.hand.model.Address" fetch="select">
             <column name="address_id" not-null="true" />
         </many-to-one>
-        <many-to-one name="store" class="com.hand.model.Store" fetch="select">
+        <many-to-one name="store" cascade="delete" class="com.hand.model.Store" fetch="select">
             <column name="store_id" not-null="true" />
         </many-to-one>
         <property name="firstName" type="string">
@@ -30,15 +30,15 @@
             <column name="create_date" length="19" not-null="true" />
         </property>
         <property name="lastUpdate" type="timestamp">
-            <column name="last_update" length="19" not-null="true" />
+            <column name="last_update" length="19"  />
         </property>
-        <set name="rentals" table="rental" inverse="true" lazy="true" fetch="select">
+        <set name="rentals" cascade="all" table="rental" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="customer_id" not-null="true" />
             </key>
             <one-to-many class="com.hand.model.Rental" />
         </set>
-        <set name="payments" table="payment" inverse="true" lazy="true" fetch="select">
+        <set name="payments" table="payment" cascade="all" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="customer_id" not-null="true" />
             </key>

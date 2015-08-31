@@ -41,9 +41,9 @@
             </key>
             <one-to-many class="com.hand.model.Staff" />
         </set>
-        <set name="customers" table="customer" inverse="true" lazy="true" fetch="select">
+        <set name="customers" table="customer" inverse="true" lazy="true" fetch="select" cascade="all" >
             <key>
-                <column name="address_id" not-null="true" />
+                <column name="address_id" not-null="true"  />
             </key>
             <one-to-many class="com.hand.model.Customer" />
         </set>

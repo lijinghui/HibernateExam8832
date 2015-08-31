@@ -6,10 +6,10 @@ import com.hand.model.Customer;
 
 public interface CustomerDao {
 
-	public void saveCus(Customer cus);
+	public int saveCus(Customer cus);
 	
-	public Customer getCus();
+	public Customer getCus(int id);
 	
-	public void delCus(Customer customer);
+	public void delCus(Short id);
 		
 }

@@ -13,6 +13,7 @@ import com.Dao.CustomerDao;
 import com.Dao.AddressDao;
 import com.hand.model.Address;
 import com.hand.model.Customer;
+import com.hand.model.Store;
 
 /**
  * Hello world!
@@ -20,7 +21,7 @@ import com.hand.model.Customer;
  */
 public class App {
 	public static void main(String[] args) {
-		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		ApplicationContext context = new ClassPathXmlApplicationContext("ApplicationContext.xml");
 		CustomerDao imp = (CustomerDao) context.getBean("CustomerDaoImp");
 		AddressDao adimp = (AddressDao) context.getBean("AddressDaoImp");
 
@@ -35,40 +36,53 @@ public class App {
 		while (true) {
 			System.out.println("请输入AddressID:");
 			a = sc.nextInt();
-			if (a < 603 && a > 0) {
+			Address address = adimp.getAd((short) a);
+			if (!address.equals(null)) {
 				break;
 			} else {
 				System.out.println("你输入的id不存在请重新输入");
 			}
 		}
 		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
-		String str = sdf.format(date);
 		Customer cus = new Customer();
 		cus.setFirstName(f);
 		cus.setLastName(l);
 		cus.setEmail(e);
+		Store store = new Store();
+		store.setStoreId((byte) 1);
+		cus.setStore(store);
 		Address address = new Address();
 		address.setAddressId((short) a);
 		cus.setAddress(address);
-		imp.saveCus(cus);
-		System.out.println(cus.getFirstName());
-		System.out.println(cus.getLastName());
-		System.out.println(cus.getEmail());
-		System.out.println(cus.getAddress().getAddress());
-		int c;
-		while (true) {
-			System.out.println("请输入要删除的id:");
-			c = sc.nextInt();
-			if (c < 606 && c > 0) {
-				Customer custom = new Customer();
-				custom.setCustomerId((short) c);
-				imp.delCus(custom);
-				break;
-			} else {
-				System.out.println("你输入的id不存在请重新输入");
+		cus.setCreateDate(date);
+		int i = imp.saveCus(cus);
+		System.out.println("已保存数据如下");
+
+		System.out.println("id"+"\t" + i);
+		System.out.println("FirstName" + "\t" + cus.getFirstName());
+		System.out.println("LastName" + "\t" + cus.getLastName());
+		System.out.println("Email" + "\t" + cus.getEmail());
+		System.out.println("地址" + "\t" + (adimp.getAd(cus.getAddress().getAddressId())).getAddress());
+
+		int c ;
+		try {
+			while (true) {
+				System.out.println("请输入要删除的id:");
+				c = sc.nextInt();
+				System.out.println(imp.getCus(c).getFirstName());
+				if (!imp.getCus(c).equals(null)) {
+					imp.delCus((short)c);
+					break;
+					
+				} else {
+					System.out.println("你输入的id不存在请重新输入");
+					
+				}
 			}
+		} catch (Exception err) {
+			err.printStackTrace();
 		}
-		adimp.getAd((short) 1);
+		System.out.println("已删除");
+		System.exit(1);
 	}
 }
